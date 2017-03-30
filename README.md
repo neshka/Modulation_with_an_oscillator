@@ -1,0 +1,2 @@
+# Modulation_with_an_oscillator
+Simple project with Web Audio API - LEARN TO CODE ELECTRONIC MUSIC TOOLS WITH JAVASCRIPT GOLDSMITHS, UNIVERSITY OF LONDON
