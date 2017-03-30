@@ -1,20 +1,34 @@
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="utf-8"> 
-		<title>AgA_@_Web_Audio_API</title>
-	</head>
-	<body>
-	  <div>
-	  </div>
 
+    <body>
+        <h2>Move your mouse right and left on green and see how you can change the lfo frequency value :)</h2>
+        <div  style="background:LightGreen ;height:33%"
+        onmousemove="lfo.frequency.value = event.clientX">
+        </div>
+    </body>
+        
+	<script>    
+    	var audio_context = window.AudioContext || window.webkitAudioContext;//first we have to use AudioContext interface
+        var con = new audio_context();
 
-	</body>
+        //and create two oscylattor
+        var osc = con.createOscillator();
+        var lfo = con.createOscillator();//lfo low frequency oscillation
 
-	<script>
-    
-    	var audio_context = window.AudioContext || window.webkitAudioContext;//AudioContext interface
-  
-    
-	</script>
+        // lfo_amp is not an oscillator - it is a 'gain node' gain -> wzmocnienie
+        var lfo_amp = con.createGain();
+
+        //we set the gain to 200 - it multiplies the input by 200!
+        lfo_amp.gain.value = 200;
+
+        osc.frequency.value = 300;
+        lfo.frequency.value = 15;//here we can increase a modulation
+
+        lfo.connect(lfo_amp);//it's our 'gain'
+        lfo_amp.connect(osc.frequency);
+        // connect the main osciilator to the audio out
+        osc.connect(con.destination);
+
+        osc.start();
+        lfo.start();
+  	</script>
 	</html>
